@@ -1,5 +1,6 @@
 import React from "react";
-import "./TodoList.css"
+import "./TodoList.css";
+import Button from "../Button/Button";
 
 function TodoList({todos, setTodos}){
     function updateTodo(id){
@@ -29,8 +30,8 @@ function TodoList({todos, setTodos}){
                 <div className="todos" key={item.id}>
                   <input className="todoCheckbox" type="checkbox" defaultChecked={ item.status === "Done" ? true : false} onChange={() => updateTodo(item.id)}/>
                     <div className="todoMessage" >{item.todo}</div>
-                    <div><button className="editButton">✏️</button></div>
-                    <div><button className="deleteButton" onClick={()=> deleteTodo(item.id)}>Delete</button></div>
+                    <Button content="✏️"/>
+                    <Button content = "Delete" onClick={()=> deleteTodo(item.id)}/>
                 </div>
                 )
             }
