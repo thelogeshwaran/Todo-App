@@ -19,7 +19,8 @@ function Todo() {
             const newTodo = {
                 id : nanoid(),
                 todo : inputTodo,
-                status : "Inprogress"
+                status : "Inprogress",
+                priority: "high"
             }
             const data = [...todos, newTodo]
             setTodos(data)
