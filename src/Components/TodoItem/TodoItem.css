@@ -1,0 +1,9 @@
+.todoCheckbox{
+    border: 2px solid red;
+    height: 30px;
+    width: 30px;
+}
+.todoItem{
+    display: flex;
+    align-items: center;
+}

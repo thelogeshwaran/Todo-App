@@ -1,6 +1,6 @@
 import React from "react";
 import "./TodoList.css";
-import Button from "../Button/Button";
+import TodoItem from "../TodoItem/TodoItem";
 
 function TodoList({todos, setTodos}){
     function updateTodo(id){
@@ -20,21 +20,25 @@ function TodoList({todos, setTodos}){
         setTodos(filteredTodo)
         localStorage.setItem("todos", JSON.stringify(filteredTodo))
     }
-
-
+    function editTodo(todo, id){
+        const updatedTodo = todos.map(item =>{
+            if(item.id === id){
+                item.todo = todo;
+                return item;
+            }
+            return item;
+        })
+        setTodos(updatedTodo)
+        localStorage.setItem("todos", JSON.stringify(updatedTodo))
+    }
     return(
         <div>
             {
-             todos.map((item) => {
-                return(
+             todos.map((item) => (
                 <div className="todos" key={item.id}>
-                  <input className="todoCheckbox" type="checkbox" defaultChecked={ item.status === "Done" ? true : false} onChange={() => updateTodo(item.id)}/>
-                    <div className="todoMessage" >{item.todo}</div>
-                    <Button content="✏️"/>
-                    <Button content = "Delete" onClick={()=> deleteTodo(item.id)}/>
+                    <TodoItem item ={item} deleteTodo={deleteTodo} updateTodo={updateTodo} editTodo={editTodo}/>
                 </div>
                 )
-            }
             )
         }
         </div>

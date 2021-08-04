@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid'
 import TodoList from "../TodoList/TodoList";
 import "./Todo.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";
@@ -17,7 +17,7 @@ function Todo() {
     function addTodo(inputTodo){
         if(inputTodo){
             const newTodo = {
-                id : uuidv4(),
+                id : nanoid(),
                 todo : inputTodo,
                 status : "Inprogress"
             }
@@ -34,7 +34,7 @@ function Todo() {
             <div className="todoHeading">
                 <h1>Todo</h1>
             </div>
-            <TodoInputForm onSubmitTodo ={addTodo} />
+            <TodoInputForm onSubmitTodo ={addTodo} placeholder="Enter Todo" value="" buttonValue="Add"/>
             <TodoList todos ={todos} setTodos = {setTodos}/>
         </div>
         )
