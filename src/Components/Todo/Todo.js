@@ -7,21 +7,13 @@ import TodoInputForm from "../TododInputForm/TodoInputForm";
 
 function Todo() {
     const [todos, setTodos] = useState([]);
-    const [priorityFilter, setPriorityFilter] = useState("All");
 
     useEffect(()=>{
         const data = JSON.parse(localStorage.getItem("todos"))
         if(data){
-            if(priorityFilter === "All"){
-                setTodos(data);
-            }else{
-                console.log(priorityFilter)
-                const filteredData = data.map(item => item.priority === priorityFilter ? item : "");
-                console.log(filteredData)
-                setTodos(filteredData)
-            }
-        }        
-    },[priorityFilter])
+            setTodos(data)
+        } 
+    },[])
 
     function addTodo(inputTodo){
         if(inputTodo){
@@ -45,7 +37,7 @@ function Todo() {
                 <h1>Todo</h1>
             </div>
             <TodoInputForm onSubmitTodo ={addTodo} placeholder="Enter Todo" value="" buttonValue="Add"/>
-            <TodoList todos ={todos} setTodos = {setTodos} priorityFilter={priorityFilter} setPriorityFilter={setPriorityFilter}/>
+            <TodoList todos ={todos} setTodos = {setTodos} />
         </div>
         )
 }
