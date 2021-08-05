@@ -32,9 +32,7 @@ function TodoItem({ item, deleteTodo, updateTodo, editTodo, updatePriority }) {
                         <div onClick={() => setEdit(true)}>
                             <Button content="✏️" />
                         </div>
-                        <div onClick={() => deleteTodo(item.id)}>
-                            <Button content="Delete" />
-                        </div>
+                        <Button onClick={() => deleteTodo(item.id)} content="Delete" />
                         <div>
                             <Dropdown className="dropdown" options={options} onChange={(e)=>onSele(e)} value={item.priority} placeholder="Select an option" />
                         </div>

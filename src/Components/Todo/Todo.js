@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import TodoList from "../TodoList/TodoList";
 import "./Todo.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";

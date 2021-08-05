@@ -1,11 +1,11 @@
 import React from "react";
 import "./Button.css"
 
-function Button({content}){
+function Button({content, onClick}){
     return(
-        <div className="todoButton">
-            <button>{content}</button>
-        </div>
+       
+            <button className="todoButton" onClick={onClick}>{content}</button>
+        
     )
 }
 
