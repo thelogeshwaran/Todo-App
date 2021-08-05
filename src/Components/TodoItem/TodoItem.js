@@ -19,7 +19,7 @@ function TodoItem({ item, deleteTodo, updateTodo, editTodo, updatePriority }) {
         updatePriority(item.id, e.value)
       }
     return (
-        <>
+        <div>
             {
                 edit ? (
                     <TodoInputForm value={item.todo} onSubmitTodo={editInput} buttonValue="update" />
@@ -36,12 +36,12 @@ function TodoItem({ item, deleteTodo, updateTodo, editTodo, updatePriority }) {
                             <Button content="Delete" />
                         </div>
                         <div>
-                            <Dropdown options={options} onChange={(e)=>onSele(e)} value={item.priority} placeholder="Select an option" />
+                            <Dropdown className="dropdown" options={options} onChange={(e)=>onSele(e)} value={item.priority} placeholder="Select an option" />
                         </div>
                     </div>
                 )
             }
-        </>
+        </div>
     )
 }
 

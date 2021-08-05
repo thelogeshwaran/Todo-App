@@ -4,15 +4,9 @@ import TodoItem from "../TodoItem/TodoItem";
 import Dropdown from 'react-dropdown';
 
 
-function TodoList({ todos, setTodos }) {
+function TodoList({ todos, setTodos, priorityFilter, setPriorityFilter }) {
     const options = [ 'All','low', 'medium', 'high' ];
-    const [priorityFilter, setPriorityFilter] = useState("All");
     
-    useEffect(()=>{
-        if(priorityFilter === "All"{
-            setTodos(todos)
-        })
-    }, [priorityFilter])
     function updateTodo(id) {
         const updatedTodo = todos.map(item => {
             if (item.id === id) {
@@ -55,13 +49,13 @@ function TodoList({ todos, setTodos }) {
 
     return (
         <div>
-            <div>
-                <div>
-                    <div>
-                        <h2>Inprogress</h2>
+            <div className="inprogress">
+                <div className="inprogressHeading">
+                    <div >
+                        <h2 className="heading">Inprogress</h2>
                     </div>
-                    <div>
-                        <Dropdown options={options}  value={priorityFilter} placeholder="Select an option" />
+                    <div className="dropdown">
+                        <Dropdown options={options} onChange={(e)=> setPriorityFilter(e.value)} value={priorityFilter} placeholder="Select an option" />
                     </div>
                 </div>
                 <div>
@@ -80,7 +74,7 @@ function TodoList({ todos, setTodos }) {
                 </div>
             </div>
             <div>
-                <h2>Done</h2>
+                <h2 className="heading">Done</h2>
                 {
                     todos.map((item) => {
                         if (item.status === "Done") {

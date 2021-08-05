@@ -3,13 +3,50 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    width: 35%;
+    margin: auto;
 }
 
 .todoMessage{
-    width: 270px;
+    width: 300px;
     margin: 10px 20px;
     font-size: 1.6rem;
     color: white;
     word-wrap: break-word;
 }
 
+.inprogressHeading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 35%;
+    margin: auto;
+}
+.heading{
+    color: var(--primary-color);
+}
+
+.dropdown{
+    width: 100px;
+    margin-left: 20px;
+}
+
+.inprogress{
+    margin: 20px;
+    margin-bottom: 30px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .todos{
+        width: 90%;
+    }
+    .todoMessage{
+        width: 200px;
+        margin: 10px;
+    }
+    .dropdown{
+        margin-left: 5px;
+        width: 80px;
+    }
+  }
