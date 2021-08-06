@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { nanoid } from 'nanoid';
 import TodoList from "../TodoList/TodoList";
 import "./Todo.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";
+import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider"
 
 
 function Todo() {
-    const [todos, setTodos] = useState([]);
-
-    useEffect(()=>{
-        const data = JSON.parse(localStorage.getItem("todos"))
-        if(data){
-            setTodos(data)
-        } 
-    },[])
-
+    const { state, dispatch } = useTodoProvider();
+   
     function addTodo(inputTodo){
         if(inputTodo){
             const newTodo = {
@@ -23,9 +17,7 @@ function Todo() {
                 status : "Inprogress",
                 priority: "high"
             }
-            const data = [...todos, newTodo]
-            setTodos(data)
-            localStorage.setItem("todos", JSON.stringify(data))
+            dispatch({ type:"ADD_DATA", payload: newTodo})
         }else{
             alert("Enter valid input")
         }
@@ -37,7 +29,7 @@ function Todo() {
                 <h1>Todo</h1>
             </div>
             <TodoInputForm onSubmitTodo ={addTodo} placeholder="Enter Todo" value="" buttonValue="Add"/>
-            <TodoList todos ={todos} setTodos = {setTodos} />
+            <TodoList />
         </div>
         )
 }

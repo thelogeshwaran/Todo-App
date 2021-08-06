@@ -4,20 +4,20 @@ import "./TodoItem.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
 
-function TodoItem({ item, deleteTodo, updateTodo, editTodo, updatePriority }) {
+function TodoItem({ item}) {
+
     const [edit, setEdit] = useState(false);
     const options = [ 'low', 'medium', 'high' ];
+    const { dispatch } = useTodoProvider();
 
     function editInput(updatedValue) {
-        editTodo(updatedValue, item.id);
-        setEdit(false)
+        dispatch({ type: "UPDATE_EDITDATA", payload: {id: item.id, value: updatedValue}})
     }
     
 
-      function onSele(e){
-        updatePriority(item.id, e.value)
-      }
+      
     return (
         <div>
             {
@@ -25,16 +25,16 @@ function TodoItem({ item, deleteTodo, updateTodo, editTodo, updatePriority }) {
                     <TodoInputForm value={item.todo} onSubmitTodo={editInput} buttonValue="update" />
                 ) : (
                     <div className="todoItem">
-                        <input className="todoCheckbox" type="checkbox" defaultChecked={item.status === "Done" ? true : false} onChange={() => updateTodo(item.id)} />
+                        <input className="todoCheckbox" type="checkbox" defaultChecked={item.status === "Done" ? true : false} onChange={() => dispatch({ type: "UPDATE_PROGRESS", payload: item.id })} />
                         <div className="todoMessage" >
                             {item.todo}
                         </div>
                         <div onClick={() => setEdit(true)}>
                             <Button content="✏️" />
                         </div>
-                        <Button onClick={() => deleteTodo(item.id)} content="Delete" />
+                            <Button onClick={() => dispatch({ type: "UPDATE_DELETEDATA", payload: item.id})} content="Delete" />
                         <div>
-                            <Dropdown className="dropdown" options={options} onChange={(e)=>onSele(e)} value={item.priority} placeholder="Select an option" />
+                            <Dropdown className="dropdown" options={options} onChange={(e)=> dispatch({ type:"UPDATE_PRIORITY", payload:{ id: item.id, value: e.value }})} value={item.priority} placeholder="Select an option" />
                         </div>
                     </div>
                 )
