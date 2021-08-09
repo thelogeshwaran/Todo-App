@@ -14,7 +14,7 @@ function TodoList() {
 
     useEffect(() => {
         setFinalData(data)
-    }, [data])
+    }, [data,state])
 
     const onDragEnd = (result) => {
         const { draggableId, destination, source } = result;
