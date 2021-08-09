@@ -6,6 +6,11 @@
 .todoItem{
     display: flex;
     align-items: center;
+    padding: 10px;
+}
+.dragging{
+    background-color: #161616;
+    color: black;
 }
 
 

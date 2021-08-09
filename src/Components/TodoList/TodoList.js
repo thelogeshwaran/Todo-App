@@ -55,10 +55,11 @@ function TodoList() {
                     </div>
 
                     <Droppable droppableId="list">
-                        {(provided) => (
+                        {(provided, snapshot) => (
                             <div
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
+                                className={ snapshot.isDraggingOver ? "draggingOver" : ""}
                             >
                                 {
                                     finalData.map((item, index) => {
@@ -84,10 +85,11 @@ function TodoList() {
                 <div>
                     <h2 className="heading">Done</h2>
                     <Droppable droppableId="list2">
-                        {(provided) => (
+                        {(provided, snapshot) => (
                             <div
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
+                                className={ snapshot.isDraggingOver ? "draggingOver" : ""}
                             >
                                 {
                                     finalData.map((item, index) => {

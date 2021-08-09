@@ -23,10 +23,10 @@ function TodoItem({ item, index }) {
     return (
         <Draggable draggableId={item.id} index={index}>
             {
-                provided => (
+                (provided, snapshot) => (
                     <div {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        ref={provided.innerRef}>
+                        ref={provided.innerRef} className={ snapshot.isDragging ? "dragging" : ""}>
                         {
                             edit ? (
                                 <TodoInputForm value={item.todo} onSubmitTodo={editInput} buttonValue="update" />

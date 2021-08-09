@@ -35,7 +35,10 @@
     margin: 20px;
     margin-bottom: 30px;
 }
-
+.draggingOver{
+    background-color: #C3BA85;
+    margin: 10px;
+}
 
 @media only screen and (max-width: 600px) {
     .todos{
