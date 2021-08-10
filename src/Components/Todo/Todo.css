@@ -1,12 +1,14 @@
 :root {
   --primary-color: #c84b31;
 }
-.todoBody {
-  min-height: 100vh;
-  height: 100%;
-}
-.todoHeading {
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--primary-color);
-  padding: 3%;
-  font-size: 1.7rem;
+}
+.todoBody {
+  height: 100%;
+  background-color: inherit;
 }

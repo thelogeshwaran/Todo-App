@@ -7,33 +7,9 @@
   margin: auto;
 }
 
-.todoMessage {
-  width: 300px;
-  margin: 10px 20px;
-  font-size: 1.6rem;
-  color: white;
-  word-wrap: break-word;
-}
-
-.inprogressHeading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 35%;
-  margin: auto;
-}
-.heading {
-  color: var(--primary-color);
-}
-
-.dropdown {
-  width: 100px;
-  margin-left: 20px;
-}
-
-.inprogress {
-  margin: 20px;
+.todoList {
   margin-bottom: 30px;
+  background-color: #346751;
 }
 .draggingOver {
   background-color: #c3ba85;
@@ -43,13 +19,5 @@
 @media only screen and (max-width: 600px) {
   .todos {
     width: 90%;
-  }
-  .todoMessage {
-    width: 200px;
-    margin: 10px;
-  }
-  .dropdown {
-    margin-left: 5px;
-    width: 80px;
   }
 }

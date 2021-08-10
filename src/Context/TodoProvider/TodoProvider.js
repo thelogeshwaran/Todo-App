@@ -1,4 +1,10 @@
-import React, { useReducer, useContext, createContext, useEffect } from "react";
+import React, {
+  useReducer,
+  useContext,
+  createContext,
+  useEffect,
+  useCallback,
+} from "react";
 import { reducerFunc, initialState } from "../../Reducer/Reducer";
 import { getProducts } from "../../Utils/Products/GetProducts";
 
@@ -18,7 +24,8 @@ export function TodoProvider({ children }) {
     localStorage.setItem("todos", JSON.stringify(state.data));
   }, [state.data]);
 
-  const data = getProducts(state);
+  const tempdata = useCallback(() => getProducts(state), [state]);
+  const data = tempdata();
   return (
     <TodoContext.Provider value={{ data, state, dispatch }}>
       {children}

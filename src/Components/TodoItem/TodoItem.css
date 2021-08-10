@@ -11,9 +11,20 @@
 .dragging {
   background-color: #161616;
 }
+.todoMessage {
+  width: 300px;
+  margin: 10px 20px;
+  font-size: 1.8rem;
+  color: white;
+  word-wrap: break-word;
+}
 
 @media only screen and (max-width: 600px) {
   .todoItem {
     flex-wrap: wrap;
+  }
+  .todoMessage {
+    width: 200px;
+    margin: 10px;
   }
 }

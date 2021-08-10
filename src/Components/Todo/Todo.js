@@ -4,9 +4,11 @@ import TodoList from "../TodoList/TodoList";
 import "./Todo.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";
 import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
+import TodoFilter from "../TodoFilter/TodoFilter";
 
 function Todo() {
-  const { dispatch } = useTodoProvider();
+  const { dispatch, data } = useTodoProvider();
+  const tempData = data.filter((item) => item.status === "Inprogress");
 
   function addTodo(inputTodo) {
     if (inputTodo) {
@@ -24,16 +26,17 @@ function Todo() {
 
   return (
     <div className="todoBody">
-      <div className="todoHeading">
-        <h1>Todo</h1>
-      </div>
       <TodoInputForm
         onSubmitTodo={addTodo}
         placeholder="Enter Todo"
         value=""
         buttonValue="Add"
       />
-      <TodoList />
+      <div className="heading">
+        <h1>Inprogress</h1>
+        <TodoFilter />
+      </div>
+      <TodoList data={tempData} />
     </div>
   );
 }
