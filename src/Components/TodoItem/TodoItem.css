@@ -1,21 +1,19 @@
-.todoCheckbox{
-    border: 2px solid red;
-    height: 30px;
-    width: 30px;
+.todoCheckbox {
+  border: 2px solid red;
+  height: 30px;
+  width: 30px;
 }
-.todoItem{
-    display: flex;
-    align-items: center;
-    padding: 10px;
+.todoItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
-.dragging{
-    background-color: #161616;
+.dragging {
+  background-color: #161616;
 }
-
 
 @media only screen and (max-width: 600px) {
-    
-    .todoItem{
-        flex-wrap: wrap;
-    }
+  .todoItem {
+    flex-wrap: wrap;
   }
+}

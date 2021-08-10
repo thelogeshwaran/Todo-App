@@ -1,12 +1,12 @@
-:root{
-    --primary-color : #C84B31;
+:root {
+  --primary-color: #c84b31;
 }
-.todoBody{
-    min-height: 100vh;
-    height: 100%;
+.todoBody {
+  min-height: 100vh;
+  height: 100%;
 }
-.todoHeading{
-    color: var(--primary-color);
-    padding: 3%;
-    font-size: 1.7rem;
+.todoHeading {
+  color: var(--primary-color);
+  padding: 3%;
+  font-size: 1.7rem;
 }
