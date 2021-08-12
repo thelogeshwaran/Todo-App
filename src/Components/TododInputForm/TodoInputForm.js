@@ -8,7 +8,8 @@ function TodoInputForm({ onSubmitTodo, placeholder, value, buttonValue }) {
   return (
     <div>
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           onSubmitTodo(inputTodo);
           setInputTodo("");
         }}

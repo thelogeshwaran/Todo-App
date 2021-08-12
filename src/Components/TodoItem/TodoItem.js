@@ -8,11 +8,13 @@ import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
 import { Draggable } from "react-beautiful-dnd";
 
 function TodoItem({ item, index }) {
+
   const [edit, setEdit] = useState(false);
   const options = ["low", "medium", "high"];
   const { dispatch } = useTodoProvider();
 
   function editInput(updatedValue) {
+    setEdit(false)
     dispatch({
       type: "UPDATE_EDITDATA",
       payload: { id: item.id, value: updatedValue },
@@ -41,7 +43,7 @@ function TodoItem({ item, index }) {
                 type="checkbox"
                 defaultChecked={item.status === "Done" ? true : false}
                 onChange={() =>
-                  dispatch({ type: "UPDATE_PROGRESS", payload: item.id })
+                  dispatch({ type: "UPDATE_PROGRESS", payload: {id :item.id, value : item.status } })
                 }
               />
               <div className="todoMessage">{item.todo}</div>

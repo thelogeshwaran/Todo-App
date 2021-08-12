@@ -32,9 +32,7 @@ function TodoList({ data }) {
       setFinalData(copiedData);
       return;
     }
-    if (destination.droppableId !== source.droppableId) {
-      dispatch({ type: "UPDATE_PROGRESS", payload: draggableId });
-    }
+
   };
 
   return (
