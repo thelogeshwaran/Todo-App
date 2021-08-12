@@ -19,7 +19,6 @@ export function TodoProvider({ children }) {
       .get()
       .then((item) => {
         let document = item.docs.map((doc) => doc.data());
-        console.log(document);
         if (document) {
           dispatch({ type: "DATA_FROM_LOCAL", payload: document });
         }

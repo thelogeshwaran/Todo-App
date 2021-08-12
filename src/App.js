@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import HomePage from "./Pages/HomePage/HomePage";
 import DonePage from "./Pages/DonePage/DonePage";
 import Navbar from './Components/Navbar/Navbar';
-import Comp from "./Test";
+
 
 function App() {
   return (
@@ -17,7 +17,6 @@ function App() {
           <DonePage/>
         </Route>
       </Switch>
-      
     </div>
   );
 }
