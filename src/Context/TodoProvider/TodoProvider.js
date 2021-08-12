@@ -14,24 +14,25 @@ const TodoContext = createContext();
 export function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(reducerFunc, initialState);
 
-  function fetchData(){
+  function fetchData() {
     db.collection("Todos")
-    .get().then( item => {
-      let document = item.docs.map((doc) => doc.data())
-      console.log(document)
-      if(document){
-        dispatch({ type: "DATA_FROM_LOCAL", payload: document });
-      }
-    })
+      .get()
+      .then((item) => {
+        let document = item.docs.map((doc) => doc.data());
+        console.log(document);
+        if (document) {
+          dispatch({ type: "DATA_FROM_LOCAL", payload: document });
+        }
+      });
   }
 
- useEffect(()=>{
-   fetchData()
- },[])
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const tempdata = useCallback(() => getProducts(state), [state]);
   const data = tempdata();
-  console.log(data)
+
   return (
     <TodoContext.Provider value={{ data, state, dispatch }}>
       {children}

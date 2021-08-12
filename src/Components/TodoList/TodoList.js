@@ -32,7 +32,6 @@ function TodoList({ data }) {
       setFinalData(copiedData);
       return;
     }
-
   };
 
   return (
