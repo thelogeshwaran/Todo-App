@@ -7,6 +7,7 @@ import "react-dropdown/style.css";
 import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
 import { Draggable } from "react-beautiful-dnd";
 import { db } from "../../Firebase/Firebase";
+import { Link } from "react-router-dom";
 
 function TodoItem({ item, index }) {
   const [edit, setEdit] = useState(false);
@@ -85,6 +86,7 @@ function TodoItem({ item, index }) {
               buttonValue="update"
             />
           ) : (
+            <Link to={`/todo/${item.id}`} className="link">
             <div className="todoItem">
               <input
                 className="todoCheckbox"
@@ -107,6 +109,7 @@ function TodoItem({ item, index }) {
                 />
               </div>
             </div>
+            </Link>
           )}
         </div>
       )}

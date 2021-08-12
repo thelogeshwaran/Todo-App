@@ -1,4 +1,4 @@
-import { db } from "../Firebase/Firebase";
+
 export const initialState = {
   data: [],
   sort: "None",
