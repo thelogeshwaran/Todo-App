@@ -1,6 +1,6 @@
 import React from "react";
 import Dropdown from "react-dropdown";
-import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
+import { useTodoProvider } from "../../Context/TodoProvider";
 import "./TodoFilter.css";
 
 function TodoFilter() {

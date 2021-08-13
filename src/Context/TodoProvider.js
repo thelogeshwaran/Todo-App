@@ -5,9 +5,9 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import { db } from "../../Firebase/Firebase";
-import { reducerFunc, initialState } from "../../Reducer/Reducer";
-import { getTodos } from "../../Utils/Todos/GetProducts";
+import { db } from "../Firebase/Firebase";
+import { reducerFunc, initialState } from "../Reducer/Reducer";
+import { getTodos } from "../Utils/Todos/GetProducts";
 
 const TodoContext = createContext();
 
@@ -22,7 +22,10 @@ export function TodoProvider({ children }) {
         if (document) {
           dispatch({ type: "DATA_FROM_LOCAL", payload: document });
         }
-      });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   useEffect(() => {

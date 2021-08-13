@@ -50,12 +50,3 @@ export function reducerFunc(state, { type, payload }) {
       return state;
   }
 }
-
-
-
-
-
-
-
-
-

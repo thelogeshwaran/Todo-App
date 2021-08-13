@@ -1,5 +1,5 @@
 import React from "react";
-import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
+import { useTodoProvider } from "../../Context/TodoProvider";
 import TodoList from "../../Components/TodoList/TodoList";
 import TodoFilter from "../../Components/TodoFilter/TodoFilter";
 

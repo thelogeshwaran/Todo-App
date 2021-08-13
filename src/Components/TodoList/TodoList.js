@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./TodoList.css";
 import TodoItem from "../TodoItem/TodoItem";
-import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
+import { useTodoProvider } from "../../Context/TodoProvider";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 
 function TodoList({ data }) {

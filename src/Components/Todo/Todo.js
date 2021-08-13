@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import TodoList from "../TodoList/TodoList";
 import "./Todo.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";
-import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
+import { useTodoProvider } from "../../Context/TodoProvider";
 import TodoFilter from "../TodoFilter/TodoFilter";
 import { db } from "../../Firebase/Firebase";
 
