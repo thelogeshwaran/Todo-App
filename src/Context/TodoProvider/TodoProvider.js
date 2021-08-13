@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { db } from "../../Firebase/Firebase";
 import { reducerFunc, initialState } from "../../Reducer/Reducer";
-import { getProducts } from "../../Utils/Products/GetProducts";
+import { getTodos } from "../../Utils/Todos/GetProducts";
 
 const TodoContext = createContext();
 
@@ -29,7 +29,7 @@ export function TodoProvider({ children }) {
     fetchData();
   }, []);
 
-  const tempdata = useCallback(() => getProducts(state), [state]);
+  const tempdata = useCallback(() => getTodos(state), [state]);
   const data = tempdata();
 
   return (

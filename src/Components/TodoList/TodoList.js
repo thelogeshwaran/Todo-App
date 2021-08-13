@@ -5,7 +5,7 @@ import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 
 function TodoList({ data }) {
-  const { state, dispatch } = useTodoProvider();
+  const { state } = useTodoProvider();
   const [finalData, setFinalData] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function TodoList({ data }) {
   }, [data, state]);
 
   const onDragEnd = (result) => {
-    const { draggableId, destination, source } = result;
+    const {  destination, source } = result;
     if (!destination) {
       return;
     }

@@ -19,6 +19,10 @@
   word-wrap: break-word;
 }
 
+.link{
+  text-decoration: none;
+}
+
 @media only screen and (max-width: 600px) {
   .todoItem {
     flex-wrap: wrap;

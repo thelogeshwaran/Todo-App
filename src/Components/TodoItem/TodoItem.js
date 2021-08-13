@@ -6,6 +6,8 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
 import { Draggable } from "react-beautiful-dnd";
+import { db } from "../../Firebase/Firebase";
+import { Link } from "react-router-dom";
 
 function TodoItem({ item, index }) {
   const [edit, setEdit] = useState(false);
@@ -13,10 +15,58 @@ function TodoItem({ item, index }) {
   const { dispatch } = useTodoProvider();
 
   function editInput(updatedValue) {
-    setEdit(false);
+    if (updatedValue) {
+      setEdit(false);
+      db.collection("Todos")
+        .doc(item.id)
+        .update({
+          todo: updatedValue,
+        })
+        .then(() => {
+          dispatch({
+            type: "UPDATE_EDITDATA",
+            payload: { id: item.id, value: updatedValue },
+          });
+        });
+    }
+  }
+
+  function deleteTodo(id) {
+    db.collection("Todos")
+      .doc(id)
+      .delete()
+      .then(() => {
+        dispatch({ type: "UPDATE_DELETEDATA", payload: id });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function updatePriority(id, value) {
+    db.collection("Todos")
+      .doc(id)
+      .update({
+        priority: value,
+      })
+      .then(() => {
+        dispatch({
+          type: "UPDATE_PRIORITY",
+          payload: { id: id, value: value },
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  function updateProgress(id, currentStatus) {
+    let updatedStatus = currentStatus === "Inprogress" ? "Done" : "Inprogress";
+    db.collection("Todos").doc(id).update({
+      status: updatedStatus,
+    });
     dispatch({
-      type: "UPDATE_EDITDATA",
-      payload: { id: item.id, value: updatedValue },
+      type: "UPDATE_PROGRESS",
+      payload: { id: item.id, value: updatedStatus },
     });
   }
 
@@ -36,43 +86,30 @@ function TodoItem({ item, index }) {
               buttonValue="update"
             />
           ) : (
+            <Link to={`/todo/${item.id}`} className="link">
             <div className="todoItem">
               <input
                 className="todoCheckbox"
                 type="checkbox"
                 defaultChecked={item.status === "Done" ? true : false}
-                onChange={() =>
-                  dispatch({
-                    type: "UPDATE_PROGRESS",
-                    payload: { id: item.id, value: item.status },
-                  })
-                }
+                onChange={() => updateProgress(item.id, item.status)}
               />
               <div className="todoMessage">{item.todo}</div>
               <div onClick={() => setEdit(true)}>
                 <Button content="✏️" />
               </div>
-              <Button
-                onClick={() =>
-                  dispatch({ type: "UPDATE_DELETEDATA", payload: item.id })
-                }
-                content="Delete"
-              />
+              <Button onClick={() => deleteTodo(item.id)} content="Delete" />
               <div>
                 <Dropdown
                   className="dropdown"
                   options={options}
-                  onChange={(e) =>
-                    dispatch({
-                      type: "UPDATE_PRIORITY",
-                      payload: { id: item.id, value: e.value },
-                    })
-                  }
+                  onChange={(e) => updatePriority(item.id, e.value)}
                   value={item.priority}
                   placeholder="Select an option"
                 />
               </div>
             </div>
+            </Link>
           )}
         </div>
       )}
