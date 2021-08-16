@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useTodoProvider } from "../../Context/TodoProvider/TodoProvider";
+import { db } from "../../Firebase/Firebase";
 
 function DetailPage() {
   const { todoId } = useParams();
-  const { data } = useTodoProvider();
-  const todo = data.filter((item) => item.id === todoId);
+  const [ todo, setTodo ] = useState("")
+  useEffect(() => {
+    db.collection("Todos")
+      .doc(todoId)
+      .get()
+      .then((doc) => {
+        setTodo(doc.data());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  
   return (
     <div>
       <div>
-        <h1>Todo : {todo[0]?.todo}</h1>
-        <h2>Status : {todo[0]?.status}</h2>
-        <h2>Priority : {todo[0]?.priority}</h2>
+        <h1>Todo : {todo?.todo}</h1>
+        <h2>Status : {todo?.status}</h2>
+        <h2>Priority : {todo?.priority}</h2>
       </div>
     </div>
   );

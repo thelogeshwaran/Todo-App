@@ -2,17 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { TodoProvider } from "./Context/TodoProvider/TodoProvider";
-import {BrowserRouter}  from "react-router-dom";
+import { TodoProvider } from "./Context/TodoProvider";
+import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./Context/AuthProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <TodoProvider>
-      <App />
-    </TodoProvider>
+      <AuthProvider>
+        <TodoProvider>
+          <App />
+        </TodoProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
-
