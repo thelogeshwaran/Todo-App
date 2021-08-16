@@ -17,12 +17,9 @@ function App() {
         <PrivateRoute exact path="/" component={HomePage}/>
         <PrivateRoute path="/done" component={DonePage}/>
         <PrivateRoute path="/todo/:todoId" component={DetailPage}/>
-        <Route path="/signup">
-        <Signup/>
-        </Route>
-        <Route path="/login">
-          <Login/>
-        </Route>
+        <Route path="/login" component={Login}/>
+        <Route path="/signup" component={Signup}/>
+        
       </Switch>
       
     </div>

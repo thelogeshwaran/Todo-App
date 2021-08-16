@@ -6,27 +6,32 @@ import TodoInputForm from "../TododInputForm/TodoInputForm";
 import { useTodoProvider } from "../../Context/TodoProvider";
 import TodoFilter from "../TodoFilter/TodoFilter";
 import { db } from "../../Firebase/Firebase";
+import { useAuthProvider } from "../../Context/AuthProvider";
 
 function Todo() {
   const { dispatch, data } = useTodoProvider();
   const tempData = data.filter((item) => item.status === "Inprogress");
+  const { currentUser } = useAuthProvider();
 
-function addTodo(inputTodo) {
+  function addTodo(inputTodo) {
     if (inputTodo) {
       const newTodo = {
         id: nanoid(),
         todo: inputTodo,
         status: "Inprogress",
         priority: "high",
-      }
-      db.collection("Todos").doc(newTodo.id).set(newTodo)
-      .then(()=>{
-        dispatch({ type: "ADD_DATA", payload: newTodo });
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-      
+      };
+      db.collection("Todos")
+        .doc(currentUser.uid)
+        .collection("todos")
+        .doc(newTodo.id)
+        .set(newTodo)
+        .then(() => {
+          dispatch({ type: "ADD_DATA", payload: newTodo });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       alert("Enter valid input");
     }

@@ -8,29 +8,35 @@ import React, {
 import { db } from "../Firebase/Firebase";
 import { reducerFunc, initialState } from "../Reducer/Reducer";
 import { getTodos } from "../Utils/Todos/GetProducts";
+import { useAuthProvider } from "./AuthProvider";
 
 const TodoContext = createContext();
 
 export function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(reducerFunc, initialState);
+  const { currentUser } = useAuthProvider();
 
   function fetchData() {
     db.collection("Todos")
+      .doc(currentUser.uid)
+      .collection("todos")
       .get()
       .then((item) => {
-        let document = item.docs.map((doc) => doc.data());
+        let document = item.docs?.map((doc) => {
+          return doc.data();
+        });
         if (document) {
           dispatch({ type: "DATA_FROM_LOCAL", payload: document });
         }
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    currentUser && fetchData();
+  }, [currentUser]);
 
   const tempdata = useCallback(() => getTodos(state), [state]);
   const data = tempdata();
