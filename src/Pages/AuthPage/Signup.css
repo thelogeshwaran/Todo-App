@@ -1,13 +1,12 @@
 .signup{
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
+    font-size: 1.5rem;
 }
 .form-signup{
-    height: 50%;
-    border: 1px solid red;
-    width: 40%;
+    height: 400px;
+    border: 2px solid red;
+    width: 30%;
 }
 
 .signup__header{
@@ -19,8 +18,9 @@
     font-size: 1.2rem;
     width: 270px;
 }
-
+.info{
+    margin: 10px;
+}
 .signup-block{
-    font-size: 1.3rem;
     font-weight: bold;
 }

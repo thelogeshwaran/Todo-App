@@ -5,24 +5,26 @@ import DonePage from "./Pages/DonePage/DonePage";
 import Navbar from './Components/Navbar/Navbar';
 import DetailPage from "./Pages/DetailPage/DetailPage";
 import Signup from "./Pages/AuthPage/Signup";
+import Login from "./Pages/AuthPage/Login";
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 
 
 function App() {
   return (
     <div className="App">
-      {/* <Navbar/>
+      <Navbar/>
       <Switch>
-        <Route exact path="/">
-          <HomePage/>
+        <PrivateRoute exact path="/" component={HomePage}/>
+        <PrivateRoute path="/done" component={DonePage}/>
+        <PrivateRoute path="/todo/:todoId" component={DetailPage}/>
+        <Route path="/signup">
+        <Signup/>
         </Route>
-        <Route path="/done">
-          <DonePage/>
+        <Route path="/login">
+          <Login/>
         </Route>
-        <Route path="/todo/:todoId">
-          <DetailPage/>
-        </Route>
-      </Switch> */}
-      <Signup/>
+      </Switch>
+      
     </div>
   );
 }
