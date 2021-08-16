@@ -13,7 +13,7 @@ function Navbar() {
       </div>
       {
         currentUser &&
-        <div>
+        <div className="nav__buttons">
         <Link to="/">
           <Button content="Inprogress" />
         </Link>

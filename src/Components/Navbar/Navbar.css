@@ -3,10 +3,17 @@
     justify-content: space-between;
     align-items: center;
     padding:  0.5% 20%;
+    flex-wrap: wrap;
 }
 .todoHeading {
     color: var(--primary-color);
     padding: 2%;
     font-size: 1.9rem;
   }
+
+  @media only screen and (max-width: 600px) {
+    .navbar{
+        padding: 0.2%;
+    }
+    }
   
