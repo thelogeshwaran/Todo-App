@@ -1,0 +1,12 @@
+.details{
+    width: auto;
+    margin: auto;
+}
+
+.detail__content{
+    margin: 10px;
+    word-wrap: break-word;
+}
+.detail__content > span {
+    color: chocolate;
+}

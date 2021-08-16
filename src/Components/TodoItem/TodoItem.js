@@ -114,7 +114,7 @@ function TodoItem({ item, index }) {
                 defaultChecked={item.status === "Done" ? true : false}
                 onChange={() => updateProgress(item.id, item.status)}
               />
-              <Link to={`/todo/${item.id}`} className="link">
+              <Link to={`/todo/${currentUser.uid}/${item.id}`} className="link">
                 <div className="todoMessage">{item.todo}</div>
               </Link>
               <div onClick={() => setEdit(true)}>

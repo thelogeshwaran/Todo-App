@@ -16,7 +16,7 @@ function App() {
       <Switch>
         <PrivateRoute exact path="/" component={HomePage}/>
         <PrivateRoute path="/done" component={DonePage}/>
-        <PrivateRoute path="/todo/:todoId" component={DetailPage}/>
+        <PrivateRoute path="/todo/:userId/:todoId" component={DetailPage}/>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
         
