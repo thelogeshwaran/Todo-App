@@ -6,6 +6,7 @@ export function sortData(data, type) {
         if (a.todo?.toLowerCase() > b.todo?.toLowerCase()) return 1;
         return 0;
       });
+      console.log(sortedFromA)
       return sortedFromA;
     case "Z to A":
       const sortedFromZ = data.sort((a, b) => {
@@ -47,7 +48,7 @@ export function sortData(data, type) {
       });
       return sortedHtoL;
     default:
-      const tempData = data.map((item) => ({ ...item }));
+      const tempData = data?.map((item) => ({ ...item }));
       return tempData;
   }
 }

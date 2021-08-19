@@ -9,16 +9,15 @@ import { Draggable } from "react-beautiful-dnd";
 import { db } from "../../Firebase/Firebase";
 import { Link } from "react-router-dom";
 import { useAuthProvider } from "../../Context/AuthProvider";
+import { observer } from "mobx-react-lite";
 
 function TodoItem({ item, index }) {
   const [edit, setEdit] = useState(false);
   const options = ["low", "medium", "high"];
-  const { dispatch } = useTodoProvider();
   const { currentUser } = useAuthProvider();
 
   function editInput(updatedValue) {
     if (updatedValue) {
-      setEdit(false);
       db.collection("Todos")
         .doc(currentUser.uid)
         .collection("todos")
@@ -27,13 +26,12 @@ function TodoItem({ item, index }) {
           todo: updatedValue,
         })
         .then(() => {
-          dispatch({
-            type: "UPDATE_EDITDATA",
-            payload: { id: item.id, value: updatedValue },
-          });
+          item.updateTodo(updatedValue)
+          setEdit(false);
         })
         .catch((err) => {
           console.log(err);
+          setEdit(false)
         });
     }
   }
@@ -45,12 +43,13 @@ function TodoItem({ item, index }) {
       .doc(id)
       .delete()
       .then(() => {
-        dispatch({ type: "UPDATE_DELETEDATA", payload: id });
+        item.removeTodo()
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
 
   function updatePriority(id, value) {
     db.collection("Todos")
@@ -61,10 +60,7 @@ function TodoItem({ item, index }) {
         priority: value,
       })
       .then(() => {
-        dispatch({
-          type: "UPDATE_PRIORITY",
-          payload: { id: id, value: value },
-        });
+        item.updatePriority(value)
       })
       .catch((err) => {
         console.log(err);
@@ -81,10 +77,7 @@ function TodoItem({ item, index }) {
         status: updatedStatus,
       })
       .then(() => {
-        dispatch({
-          type: "UPDATE_PROGRESS",
-          payload: { id: item.id, value: updatedStatus },
-        });
+        item.updateStatus(updatedStatus)
       })
       .catch((err) => {
         console.log(err);
@@ -92,7 +85,8 @@ function TodoItem({ item, index }) {
   }
 
   return (
-    <Draggable draggableId={item.id} index={index}>
+    
+      <Draggable draggableId={item.id} index={index}>
       {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
@@ -100,6 +94,7 @@ function TodoItem({ item, index }) {
           ref={provided.innerRef}
           className={snapshot.isDragging ? "dragging" : ""}
         >
+
           {edit ? (
             <TodoInputForm
               value={item.todo}
@@ -132,10 +127,10 @@ function TodoItem({ item, index }) {
               </div>
             </div>
           )}
-        </div>
-      )}
+          </div>
+          )}
     </Draggable>
   );
 }
 
-export default TodoItem;
+export default observer(TodoItem);

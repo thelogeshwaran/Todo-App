@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
 import Todo from "../../Components/Todo/Todo";
 import "./HomePage.css";
@@ -9,4 +10,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default observer(HomePage);

@@ -3,14 +3,16 @@ import "./TodoList.css";
 import TodoItem from "../TodoItem/TodoItem";
 import { useTodoProvider } from "../../Context/TodoProvider";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
+import { observer } from "mobx-react-lite";
+import SingleTodo from "../../SingleTodo";
 
 function TodoList({ data }) {
-  const { state } = useTodoProvider();
-  const [finalData, setFinalData] = useState([]);
 
+  const [finalData, setFinalData] = useState([]);
+  const {rootTree} = useTodoProvider();
   useEffect(() => {
     setFinalData(data);
-  }, [data, state]);
+  }, [data, rootTree.todos]);
 
   const onDragEnd = (result) => {
     const {  destination, source } = result;
@@ -45,14 +47,15 @@ function TodoList({ data }) {
                 {...provided.droppableProps}
                 className={snapshot.isDraggingOver ? "draggingOver" : ""}
               >
-                {finalData.map((item, index) => {
-                  return (
-                    <div className="todos" key={item.id}>
-                      <TodoItem item={item} index={index} />
-                    </div>
-                  );
-                })}
-                {provided.placeholder}
+      {finalData.map((item, index) => {
+        return (
+          <div className="todos" key={item.id}>
+            <TodoItem item={item} index={index} />
+            {/* <SingleTodo item={item}/> */}
+          </div>
+        );
+      })}
+      {provided.placeholder}
               </div>
             )}
           </Droppable>
@@ -62,4 +65,4 @@ function TodoList({ data }) {
   );
 }
 
-export default TodoList;
+export default observer(TodoList);
