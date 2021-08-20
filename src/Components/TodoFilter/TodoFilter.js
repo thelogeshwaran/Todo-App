@@ -3,7 +3,7 @@ import Dropdown from "react-dropdown";
 import { useTodoProvider } from "../../Context/TodoProvider";
 import { observer } from "mobx-react-lite";
 import "./TodoFilter.css";
-import { setupRootStore } from "../../Models/Setup";
+
 
 function TodoFilter() {
   const options = ["All", "low", "medium", "high"];

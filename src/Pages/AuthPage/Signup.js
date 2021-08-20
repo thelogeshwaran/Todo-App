@@ -3,7 +3,6 @@ import "./Signup.css";
 import Button from "../../Components/Button/Button";
 import { useAuthProvider } from "../../Context/AuthProvider";
 import { Link, useHistory } from "react-router-dom";
-import { db } from "../../Firebase/Firebase";
 
 function Signup() {
   const emailRef = useRef();
@@ -12,7 +11,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   let history = useHistory();
 
-  const { signup, currentUser } = useAuthProvider();
+  const { signup } = useAuthProvider();
 
   async function handleSignUp(e) {
     e.preventDefault();

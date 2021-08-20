@@ -4,7 +4,6 @@ import "./TodoItem.css";
 import TodoInputForm from "../TododInputForm/TodoInputForm";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import { useTodoProvider } from "../../Context/TodoProvider";
 import { Draggable } from "react-beautiful-dnd";
 import { db } from "../../Firebase/Firebase";
 import { Link } from "react-router-dom";

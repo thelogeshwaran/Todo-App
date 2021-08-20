@@ -1,4 +1,4 @@
-import { TodoModel, TodoStore } from "./Store";
+import { TodoStore } from "./Store";
 
 export const setupRootStore = () =>{
     const rootTree = TodoStore.create({

@@ -9,16 +9,20 @@ export function AuthProvider({ children }) {
 
   function signup(email, password) {
     auth.createUserWithEmailAndPassword(email, password).then((response) => {
+      localStorage.setItem("user", JSON.stringify(response.user))
       db.collection("Todos").doc(response.user.uid).set({
         email: response.user.email,
       });
     });
   }
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+   auth.signInWithEmailAndPassword(email, password).then( (response) =>{
+    localStorage.setItem("user", JSON.stringify(response.user))
+   } )
   }
   function logout() {
     auth.signOut();
+    localStorage.removeItem("user")
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

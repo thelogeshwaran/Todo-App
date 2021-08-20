@@ -8,8 +8,6 @@ import TodoFilter from "../TodoFilter/TodoFilter";
 import { db } from "../../Firebase/Firebase";
 import { useAuthProvider } from "../../Context/AuthProvider";
 import { observer } from "mobx-react-lite"
-import { setupRootStore } from "../../Models/Setup";
-import { getTodos } from "../../Utils/Todos/GetTodos";
 
 function Todo() {
   const { rootTree } = useTodoProvider();

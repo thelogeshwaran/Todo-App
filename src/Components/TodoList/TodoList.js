@@ -4,15 +4,14 @@ import TodoItem from "../TodoItem/TodoItem";
 import { useTodoProvider } from "../../Context/TodoProvider";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { observer } from "mobx-react-lite";
-import SingleTodo from "../../SingleTodo";
-
+import { sortData } from "../../Utils/Todos/SortData";
 function TodoList({ data }) {
 
   const [finalData, setFinalData] = useState([]);
   const {rootTree} = useTodoProvider();
   useEffect(() => {
-    setFinalData(data);
-  }, [data, rootTree.todos]);
+      setFinalData(data)
+  }, [data, rootTree.sort]);
 
   const onDragEnd = (result) => {
     const {  destination, source } = result;
@@ -36,6 +35,9 @@ function TodoList({ data }) {
     }
   };
 
+  sortData(finalData,rootTree.sort);
+
+
   return (
     <div>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -51,7 +53,6 @@ function TodoList({ data }) {
         return (
           <div className="todos" key={item.id}>
             <TodoItem item={item} index={index} />
-            {/* <SingleTodo item={item}/> */}
           </div>
         );
       })}

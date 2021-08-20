@@ -1,7 +1,7 @@
-import { applySnapshot, destroy, getParent, onSnapshot, types } from "mobx-state-tree";
+import { destroy, getParent, types } from "mobx-state-tree";
 import { db } from "../Firebase/Firebase";
 import { filterData } from "../Utils/Todos/FilterData";
-import { sortData } from "../Utils/Todos/SortData";
+
 
 export const TodoModel = types.model("TodoModel", {
     todo: types.string,
@@ -61,9 +61,6 @@ export const TodoStore = types.model("TodoStore", {
     },
     remove(item){
         destroy(item)
-    },
-    afterCreate(){
-        onSnapshot(self, snap => console.log(snap))
     }
 }))
 .views( self =>({
