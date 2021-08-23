@@ -49,7 +49,6 @@ export function sortData(data, type) {
       });
       return sortedHtoL;
     default:
-      const tempData = data?.map((item) => ({ ...item }));
-      return tempData;
+      return data;
   }
 }

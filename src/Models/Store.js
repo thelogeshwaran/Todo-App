@@ -1,6 +1,7 @@
 import { destroy, getParent, types } from "mobx-state-tree";
 import { db } from "../Firebase/Firebase";
 import { filterData } from "../Utils/Todos/FilterData";
+import { sortData } from "../Utils/Todos/SortData";
 
 
 export const TodoModel = types.model("TodoModel", {
@@ -57,6 +58,8 @@ export const TodoStore = types.model("TodoStore", {
         self.filter = filter;
     },
     setSort(sort){
+        const tempData = sortData(self.todos, sort)
+        self.setTodos(tempData)
         self.sort = sort;
     },
     remove(item){

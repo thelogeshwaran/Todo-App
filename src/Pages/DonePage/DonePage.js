@@ -6,7 +6,8 @@ import { observer } from "mobx-react-lite";
 
 function DonePage() {
   const { rootTree } = useTodoProvider();
-  const tempdata = rootTree.todos.filter((item) => item.status === "Done");
+  const filtered = rootTree.filteredData();
+  const tempdata = filtered.filter((item) => item.status === "Done");
   return (
     <div>
       <div className="heading">
