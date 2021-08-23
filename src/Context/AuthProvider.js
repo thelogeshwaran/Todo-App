@@ -13,12 +13,16 @@ export function AuthProvider({ children }) {
       db.collection("Todos").doc(response.user.uid).set({
         email: response.user.email,
       });
-    });
+    }).catch( err => {
+      console.log(err)
+    })
   }
   function login(email, password) {
    auth.signInWithEmailAndPassword(email, password).then( (response) =>{
     localStorage.setItem("user", JSON.stringify(response.user))
-   } )
+   } ).catch( err => {
+    console.log(err)
+  })
   }
   function logout() {
     auth.signOut();
