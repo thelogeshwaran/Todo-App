@@ -28,6 +28,7 @@ export function sortData(data, type) {
         ) {
           return 1;
         }
+        return 0;
       });
       return sortedLtoH;
     case "Low to High":
@@ -44,10 +45,11 @@ export function sortData(data, type) {
         ) {
           return -1;
         }
+        return 0;
       });
       return sortedHtoL;
     default:
-      const tempData = data.map((item) => ({ ...item }));
+      const tempData = data?.map((item) => ({ ...item }));
       return tempData;
   }
 }

@@ -7,14 +7,17 @@ import { useTodoProvider } from "../../Context/TodoProvider";
 import TodoFilter from "../TodoFilter/TodoFilter";
 import { db } from "../../Firebase/Firebase";
 import { useAuthProvider } from "../../Context/AuthProvider";
+import { observer } from "mobx-react-lite"
 
 function Todo() {
-  const { dispatch, data } = useTodoProvider();
-  const tempData = data.filter((item) => item.status === "Inprogress");
+  const { rootTree } = useTodoProvider();
+  const filtered = rootTree.filteredData();
+  const tempData = filtered.filter((item) => item.status === "Inprogress");
   const { currentUser } = useAuthProvider();
+  
 
   function addTodo(inputTodo) {
-    if (inputTodo) {
+    if (inputTodo) { 
       const newTodo = {
         id: nanoid(),
         todo: inputTodo,
@@ -27,7 +30,7 @@ function Todo() {
         .doc(newTodo.id)
         .set(newTodo)
         .then(() => {
-          dispatch({ type: "ADD_DATA", payload: newTodo });
+          rootTree.addNewTodo(newTodo)
         })
         .catch((err) => {
           console.log(err);
@@ -54,4 +57,4 @@ function Todo() {
   );
 }
 
-export default Todo;
+export default observer(Todo);

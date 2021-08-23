@@ -1,13 +1,12 @@
 import React from 'react';
-import { useAuthProvider } from '../../Context/AuthProvider';
 import { Redirect, Route } from "react-router-dom";
 function PrivateRoute({ component : Component, ...rest}) {
-    const { currentUser } = useAuthProvider();
+    const user = JSON.parse(localStorage.getItem("user"))
     return (
         <Route
             {...rest}
             render = { props => {
-                return  currentUser ? <Component {...props} /> : <Redirect to="/login"/>
+                return  user ? <Component {...props} /> : <Redirect to="/login"/>
             }
         }>
         </Route>

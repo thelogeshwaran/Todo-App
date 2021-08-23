@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import "./Signup.css";
 import Button from "../../Components/Button/Button";
 import { useAuthProvider } from "../../Context/AuthProvider";
@@ -8,12 +8,8 @@ function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [loading, setLoading] = useState(false);
-  const { login, currentUser } = useAuthProvider();
+  const { login } = useAuthProvider();
   let history = useHistory();
-
-  useEffect(() => {
-    currentUser && history.push("/");
-  }, [currentUser]);
 
   async function handleSignUp(e) {
     e.preventDefault();

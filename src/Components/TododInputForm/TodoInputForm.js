@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./TodoInputForm.css";
 import Button from "../Button/Button";
+import { observer } from "mobx-react-lite";
 
 function TodoInputForm({ onSubmitTodo, placeholder, value, buttonValue }) {
   const [inputTodo, setInputTodo] = useState(value);
@@ -29,4 +30,4 @@ function TodoInputForm({ onSubmitTodo, placeholder, value, buttonValue }) {
   );
 }
 
-export default TodoInputForm;
+export default observer(TodoInputForm);

@@ -7,6 +7,7 @@ import DetailPage from "./Pages/DetailPage/DetailPage";
 import Signup from "./Pages/AuthPage/Signup";
 import Login from "./Pages/AuthPage/Login";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import { observer } from "mobx-react-lite";
 
 
 function App() {
@@ -26,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);

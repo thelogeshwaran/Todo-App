@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../Firebase/Firebase";
@@ -18,7 +19,7 @@ function DetailPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [todoId,userId]);
   
   return (
     <div className="details">
@@ -31,4 +32,4 @@ function DetailPage() {
   );
 }
 
-export default DetailPage;
+export default observer(DetailPage);
