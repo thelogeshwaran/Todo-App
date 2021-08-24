@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
     auth
       .createUserWithEmailAndPassword(data.Email, data.Password)
       .then((response) => {
-        localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("user", JSON.stringify(response.user.uid));
         delete data.password;
         db.collection("Todos").doc(response.user.uid).set(data);
         history.push("/");
@@ -21,14 +21,13 @@ export function AuthProvider({ children }) {
       .catch((err) => {
         console.log(err);
       });
-    console.log(data);
     return;
   }
   function login(email, password) {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
-        localStorage.setItem("user", JSON.stringify(response.user));
+        localStorage.setItem("user", JSON.stringify(response.user.uid));
         history.push("/");
       })
       .catch((err) => {

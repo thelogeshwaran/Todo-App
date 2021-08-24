@@ -33,7 +33,6 @@
 .radioSelect {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
   margin: 15px;
   font-size: 1.5rem;
@@ -44,4 +43,14 @@
 
 .signupLink {
   color: white;
+}
+.checkBox {
+  height: 25px;
+  width: 25px;
+  margin: 5px 10px;
+}
+@media only screen and (max-width: 600px) {
+  .Form {
+    width: 80%;
+  }
 }

@@ -9,15 +9,17 @@ import * as yup from "yup";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
+  const { signup } = useAuthProvider();
 
   const schema = yup.object().shape({
     FirstName: yup.string().min(5).max(20).required(),
     LastName: yup.string().max(20).required(),
-    Email: yup.string().required(),
+    Email: yup.string().email().required(),
     Password: yup.string().min(8).max(32).required(),
     Phone: yup.string().min(10).max(12).required(),
     State: yup.string().required(),
     Gender: yup.string().required(),
+    Terms: yup.boolean().oneOf([true], "Agree to the terms and conditions!"),
   });
 
   const {
@@ -32,8 +34,6 @@ function Signup() {
     await signup(data);
     reset();
   };
-
-  const { signup } = useAuthProvider();
 
   return (
     <div className="Form">
@@ -120,6 +120,17 @@ function Signup() {
           <label htmlFor="female">Female </label>
         </div>
         <p className="errorInfo">{errors.Gender ? "This is required" : ""}</p>
+
+        <div className="field">
+          <input
+            type="checkbox"
+            className="checkBox"
+            id="terms"
+            {...register("Terms")}
+          ></input>
+          <label htmlFor="terms"> I Agree to the Terms and conditions.</label>
+        </div>
+        <p className="errorInfo">{errors.Terms?.message}</p>
 
         <Button content="Submit" disabled={loading} />
         <div className="info">
