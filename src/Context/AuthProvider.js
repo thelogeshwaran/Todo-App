@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect, createContext } from "react";
+import { useHistory } from "react-router";
 import { auth } from "../Firebase/Firebase";
 import { db } from "../Firebase/Firebase";
 
@@ -6,27 +7,39 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState("");
+  const history = useHistory();
 
-  function signup(email, password) {
-    auth.createUserWithEmailAndPassword(email, password).then((response) => {
-      localStorage.setItem("user", JSON.stringify(response.user))
-      db.collection("Todos").doc(response.user.uid).set({
-        email: response.user.email,
+  function signup(data) {
+    auth
+      .createUserWithEmailAndPassword(data.Email, data.Password)
+      .then((response) => {
+        localStorage.setItem("user", JSON.stringify(response.user));
+        delete data.password;
+        db.collection("Todos").doc(response.user.uid).set(data);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }).catch( err => {
-      console.log(err)
-    })
+    console.log(data);
+    return;
   }
   function login(email, password) {
-   auth.signInWithEmailAndPassword(email, password).then( (response) =>{
-    localStorage.setItem("user", JSON.stringify(response.user))
-   } ).catch( err => {
-    console.log(err)
-  })
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        localStorage.setItem("user", JSON.stringify(response.user));
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return;
   }
   function logout() {
     auth.signOut();
-    localStorage.removeItem("user")
+    localStorage.removeItem("user");
+    history.push("/login");
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
