@@ -13,9 +13,9 @@ export function AuthProvider({ children }) {
     auth
       .createUserWithEmailAndPassword(data.Email, data.Password)
       .then((response) => {
+        const tempData  = {...data, Password:""};
         localStorage.setItem("user", JSON.stringify(response.user.uid));
-        delete data.password;
-        db.collection("Todos").doc(response.user.uid).set(data);
+        db.collection("Todos").doc(response.user.uid).set(tempData);
         history.push("/");
       })
       .catch((err) => {

@@ -71,7 +71,7 @@ function Signup() {
 
         <input
           className="inputForm"
-          type="text"
+          type="number"
           id="phone"
           placeholder="Phone"
           {...register("Phone")}
